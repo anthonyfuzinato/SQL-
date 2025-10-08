@@ -128,15 +128,26 @@ group by suspeitos.nome
 
 
 -- 12. Ordena os suspeitos pelo número de locais diferentes visitados.
-Select Distinct count(*) as LocaisDiferentes, suspeitos.nome
-from locais
-inner join suspeitos
-on suspeitos.id = locais.id
-group by locais
-
+ 
+SELECT Suspeitos.nome, COUNT(*)
+FROM Movimentos
+INNER JOIN Suspeitos
+ON Movimentos.id_suspeito = Suspeitos.id
+GROUP BY Suspeitos.nome
+ORDER BY COUNT(*) DESC
+ 
 --Consulta Final
 --13. Usando todas as pistas:
 -- - Esteve no Museu por volta das 15:00
 -- - Saiu de bicicleta
 -- - Gosta de música
 -- - Não usava carro
+ 
+SELECT Suspeitos.nome
+FROM Suspeitos
+INNER JOIN Movimentos
+ON Suspeitos.id = Movimentos.id_suspeito
+INNER JOIN Locais
+ON Movimentos.id_local = Locais.id
+WHERE Locais.nome_local = 'Museu' AND Movimentos.hora = '15:00' AND Suspeitos.transporte = 'Bicicleta' AND Suspeitos.hobby = 'Música'
+
