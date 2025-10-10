@@ -1,160 +1,160 @@
-﻿/*Anthony Fuzinato Nº01  12ºH*/
+/*anthony fuzinato nº01  12ºh*/
 
-SELECT IIF(CHARINDEX(' ',Nome) = 0,NOME,SUBSTRING(NOME,0,CHARINDEX(' ',Nome))), Clube_Atual
-FROM Jogadores
-WHERE Clube_Atual = 'F.C.PORTO'
- 
-SELECT Nome
-FROM Clubes
-WHERE DATEPART(YEAR,GETDATE()) - ANO_FORMACAO > 100
- 
-SELECT TOP 1 NOME, ANO_FORMACAO
-FROM Clubes
-ORDER BY ANO_FORMACAO ASC
- 
-SELECT NOME, Nacionalidade
-FROM Jogadores
-WHERE Nacionalidade <> 'PORTUGAL'
-ORDER BY NOME ASC
- 
-SELECT SUBSTRING(NOME,CHARINDEX(' ',NOME),LEN(NOME))
-FROM CLUBES
-WHERE NOME LIKE '%VITÓRIA%'
- 
-SELECT NOME, POSICAO
-FROM Jogadores
-WHERE Clube_Atual = 'S.L.BENFICA' AND DATEDIFF(YEAR,DATA_NASCIMENTO,GETDATE()) > 30
- 
-SELECT COUNT(*) AS [Nº de Guarda Redes]
-FROM Jogadores
-WHERE Posicao = 'GUARDA REDES'
- 
-SELECT *
-FROM JOGADORES
-INNER JOIN Clubes_Campeonatos
-ON Clube_Atual = Clubes_Campeonatos.Nome_Clube
-WHERE Nacionalidade <> 'PORTUGAL' AND Cod_Campeonato LIKE '%LIGA_ZON_SAGRES_2018%'
- 
-SELECT SUM(N_JOGOS)
-FROM Historico_Jogadores_Campeonatos
-INNER JOIN Jogadores
-ON Historico_Jogadores_Campeonatos.N_Jogador = Jogadores.N_Jogador
-WHERE Jogadores.Nome = 'FÁBIO COENTRÃO'
- 
-SELECT Cod_Campeonato ,AVG(N_JOGOS)
-FROM Historico_Jogadores_Campeonatos
-INNER JOIN Jogadores
-ON Historico_Jogadores_Campeonatos.N_Jogador = Jogadores.N_Jogador
-WHERE Jogadores.Nome = 'JONAS'
-GROUP BY Cod_Campeonato
- 
-SELECT Nome, SUM(N_JOGOS)
-FROM Jogadores
-INNER JOIN Historico_Jogadores_Campeonatos
-ON Jogadores.N_Jogador = Historico_Jogadores_Campeonatos.N_Jogador
-GROUP BY JOGADORES.N_Jogador, Nome
- 
-SELECT Data, Nome_Equipa_Visitante,Golos_Equipa_Visitante,Golos_Equipa_Visitada,Nome_Equipa_Visitada
-FROM Jogos
-WHERE Nome_Equipa_Visitada = 'S.L.BENFICA' AND Nome_Equipa_Visitante = 'F.C.PORTO' OR 
-Nome_Equipa_Visitante = 'S.L.BENFICA' AND Nome_Equipa_Visitada = 'F.C.PORTO'
- 
-SELECT DISTINCT Nome
-FROM Jogadores
-FULL OUTER JOIN Historico_Jogadores_Campeonatos
-ON Jogadores.N_Jogador = Historico_Jogadores_Campeonatos.N_Jogador
-WHERE Nome_Clube = 'S.L.BENFICA' OR Clube_Atual = 'S.L.BENFICA'
- 
-SELECT COUNT(*)
-FROM JOGOS
-WHERE (Nome_Equipa_Visitada = 'SPORTING' OR Nome_Equipa_Visitante = 'SPORTING') AND Campeonato = 'LIGA_ZON_SAGRES_2018'
- 
-SELECT DISTINCT Nome_Clube
-FROM Clubes_Campeonatos
-WHERE Cod_Campeonato LIKE 'LIGA_ZON_SAGRES%'
- 
-SELECT SUM(GOLOS_EQUIPA_VISITANTE)
-FROM JOGOS
-WHERE Nome_Equipa_Visitante = 'SPORTING'
- 
-SELECT *
-FROM Jogadores
-WHERE Lesionado = 0 AND Clube_Atual = 'F.C.PORTO'
- 
-SELECT TOP 1 RIGHT(Cod_Campeonato,4)
-FROM Clubes_Campeonatos
-WHERE NOME_CLUBE = 'MARITIMO'
-ORDER BY Posicao ASC
- 
-SELECT TOP 2 Nome_Clube
-FROM Clubes_Campeonatos
-WHERE Cod_Campeonato = 'LIGA_ZON_SAGRES_2017'
-ORDER BY Posicao DESC
- 
-SELECT *
-FROM JOGOS
-WHERE Campeonato = 'LIGA_ZON_SAGRES_2017'
-ORDER BY Data ASC
- 
-SELECT *
-FROM Clubes_Campeonatos
-WHERE COD_CAMPEONATO LIKE '%2018' AND Posicao = '1'
- 
-SELECT *
-FROM JOGOS
-WHERE Espetadores > (SELECT AVG(ESPETADORES) FROM JOGOS)
- 
-SELECT TOP 3 *
-FROM JOGOS
-ORDER BY Espetadores DESC
- 
-SELECT TOP 2 Nome_Clube
-FROM Clubes_Campeonatos
-WHERE Cod_Campeonato = 'LIGA_ZON_SAGRES_2016'
-ORDER BY Posicao ASC
- 
-SELECT *
-FROM JOGOS
-WHERE GETDATE() < Data
- 
-SELECT DATA, Nome_Equipa_Visitada, Nome_Equipa_Visitante, Estadio
-FROM JOGOS
-WHERE DATEPART(YEAR,DATA) = '2017'
- 
-SELECT AVG(ESPETADORES) AS [Média de espetadores esta época]
-FROM Jogos
-WHERE Campeonato = 'LIGA_ZON_SAGRES_2018'
- 
-SELECT *
-FROM JOGADORES
-ORDER BY Clube_Atual, Posicao ASC
+select iif(charindex(' ',nome) = 0,nome,substring(nome,0,charindex(' ',nome))), clube_atual
+from jogadores
+where clube_atual = 'f.c.porto'
 
-SELECT NOME, CLUBE_ATUAL
-FROM Jogadores
-WHERE DATEDIFF(YEAR,DATA_NASCIMENTO,GETDATE()) >= 18 AND DATEDIFF(YEAR,DATA_NASCIMENTO,GETDATE()) <= 20
- 
-SELECT 2.5*Espetadores,*
-FROM JOGOS
-WHERE Estadio LIKE '%MUNICIPAL%'
- 
-SELECT ABS(Golos_Equipa_Visitada-Golos_Equipa_Visitante)
-FROM JOGOS
-WHERE Nome_Equipa_Visitada = 'S.L.BENFICA' OR Nome_Equipa_Visitante = 'S.L.BENFICA'
- 
-SELECT NOME,DATEDIFF(YEAR,DATA_NASCIMENTO,GETDATE()) AS [IDADE],DATEDIFF(YEAR,DATA_NASCIMENTO,GETDATE())+5 AS [IDADE DAQUI A 5 ANOS]
-FROM Jogadores
- 
-SELECT *
-FROM Jogos
-WHERE Estadio IN ('ALVALADE','DRAGÃO','MUNICIPAL DE BRAGA')
- 
-SELECT Clubes_Campeonatos.Cod_Campeonato,Nome_Clube
-FROM Clubes_Campeonatos
-INNER JOIN Campeonatos
-ON Clubes_Campeonatos.Cod_Campeonato = Campeonatos.Cod_Campeonato
-WHERE Epoca = '2018'
-ORDER BY Divisao,Cod_Campeonato
- 
-SELECT *
-FROM Clubes_Campeonatos
-WHERE Nome_Clube = 'ACADÉMICO VISEU'
+select nome
+from clubes
+where datepart(year,getdate()) - ano_formacao > 100
+
+select top 1 nome, ano_formacao
+from clubes
+order by ano_formacao asc
+
+select nome, nacionalidade
+from jogadores
+where nacionalidade <> 'portugal'
+order by nome asc
+
+select substring(nome,charindex(' ',nome),len(nome))
+from clubes
+where nome like '%vitória%'
+
+select nome, posicao
+from jogadores
+where clube_atual = 's.l.benfica' and datediff(year,data_nascimento,getdate()) > 30
+
+select count(*) as [nº de guarda redes]
+from jogadores
+where posicao = 'guarda redes'
+
+select *
+from jogadores
+inner join clubes_campeonatos
+on clube_atual = clubes_campeonatos.nome_clube
+where nacionalidade <> 'portugal' and cod_campeonato like '%liga_zon_sagres_2018%'
+
+select sum(n_jogos)
+from historico_jogadores_campeonatos
+inner join jogadores
+on historico_jogadores_campeonatos.n_jogador = jogadores.n_jogador
+where jogadores.nome = 'fábio coentrão'
+
+select cod_campeonato ,avg(n_jogos)
+from historico_jogadores_campeonatos
+inner join jogadores
+on historico_jogadores_campeonatos.n_jogador = jogadores.n_jogador
+where jogadores.nome = 'jonas'
+group by cod_campeonato
+
+select nome, sum(n_jogos)
+from jogadores
+inner join historico_jogadores_campeonatos
+on jogadores.n_jogador = historico_jogadores_campeonatos.n_jogador
+group by jogadores.n_jogador, nome
+
+select data, nome_equipa_visitante,golos_equipa_visitante,golos_equipa_visitada,nome_equipa_visitada
+from jogos
+where nome_equipa_visitada = 's.l.benfica' and nome_equipa_visitante = 'f.c.porto' or 
+nome_equipa_visitante = 's.l.benfica' and nome_equipa_visitada = 'f.c.porto'
+
+select distinct nome
+from jogadores
+full outer join historico_jogadores_campeonatos
+on jogadores.n_jogador = historico_jogadores_campeonatos.n_jogador
+where nome_clube = 's.l.benfica' or clube_atual = 's.l.benfica'
+
+select count(*)
+from jogos
+where (nome_equipa_visitada = 'sporting' or nome_equipa_visitante = 'sporting') and campeonato = 'liga_zon_sagres_2018'
+
+select distinct nome_clube
+from clubes_campeonatos
+where cod_campeonato like 'liga_zon_sagres%'
+
+select sum(golos_equipa_visitante)
+from jogos
+where nome_equipa_visitante = 'sporting'
+
+select *
+from jogadores
+where lesionado = 0 and clube_atual = 'f.c.porto'
+
+select top 1 right(cod_campeonato,4)
+from clubes_campeonatos
+where nome_clube = 'maritimo'
+order by posicao asc
+
+select top 2 nome_clube
+from clubes_campeonatos
+where cod_campeonato = 'liga_zon_sagres_2017'
+order by posicao desc
+
+select *
+from jogos
+where campeonato = 'liga_zon_sagres_2017'
+order by data asc
+
+select *
+from clubes_campeonatos
+where cod_campeonato like '%2018' and posicao = '1'
+
+select *
+from jogos
+where espetadores > (select avg(espetadores) from jogos)
+
+select top 3 *
+from jogos
+order by espetadores desc
+
+select top 2 nome_clube
+from clubes_campeonatos
+where cod_campeonato = 'liga_zon_sagres_2016'
+order by posicao asc
+
+select *
+from jogos
+where getdate() < data
+
+select data, nome_equipa_visitada, nome_equipa_visitante, estadio
+from jogos
+where datepart(year,data) = '2017'
+
+select avg(espetadores) as [média de espetadores esta época]
+from jogos
+where campeonato = 'liga_zon_sagres_2018'
+
+select *
+from jogadores
+order by clube_atual, posicao asc
+
+select nome, clube_atual
+from jogadores
+where datediff(year,data_nascimento,getdate()) >= 18 and datediff(year,data_nascimento,getdate()) <= 20
+
+select 2.5*espetadores,*
+from jogos
+where estadio like '%municipal%'
+
+select abs(golos_equipa_visitada-golos_equipa_visitante)
+from jogos
+where nome_equipa_visitada = 's.l.benfica' or nome_equipa_visitante = 's.l.benfica'
+
+select nome,datediff(year,data_nascimento,getdate()) as [idade],datediff(year,data_nascimento,getdate())+5 as [idade daqui a 5 anos]
+from jogadores
+
+select *
+from jogos
+where estadio in ('alvalade','dragão','municipal de braga')
+
+select clubes_campeonatos.cod_campeonato,nome_clube
+from clubes_campeonatos
+inner join campeonatos
+on clubes_campeonatos.cod_campeonato = campeonatos.cod_campeonato
+where epoca = '2018'
+order by divisao,cod_campeonato
+
+select *
+from clubes_campeonatos
+where nome_clube = 'académico viseu'
