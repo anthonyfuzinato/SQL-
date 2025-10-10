@@ -24,7 +24,9 @@ Select Nome, Data_validade
 From Produtos
 Where DATEDIFF(year,GETDATE(),Data_validade) > 30
 
-/*/*7_todos os produtos com validade do mês atual*/*/
+select *
+from produtos
+where month(data_validade) = month(getdate())
 
 Select Tipo, COUNT(*)
 From Produtos
@@ -107,3 +109,4 @@ ORDER BY len(Nome) DESC
 Select Right(nome,1),Preco 
 From Produtos
 Where Right(Nome,1) = 'b'
+
